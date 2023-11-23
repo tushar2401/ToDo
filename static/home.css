@@ -1,0 +1,39 @@
+body{
+    background-color: #c3bee5;
+    
+}
+#cont{
+    padding: 20px;
+}
+h2  {
+    text-align: center;
+  } 
+
+#as,#be{
+    margin-top: 10px;
+    display: inline;
+    margin-top: 20px;
+
+}
+#as a,#be a{
+    color: aqua;
+}
+#be{
+    
+}
+
+h2  {
+    text-align: center;
+  } 
+  table{
+    background-color: antiquewhite;
+  }
+  #tasks{
+    margin-left: 1%;
+    width:98%;
+  }
+  #tasks tr:nth-child(even){background-color: #f2f2f2;}
+  #tasks th{background-color: aquamarine;}
+  
+
+

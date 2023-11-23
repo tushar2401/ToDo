@@ -1,0 +1,61 @@
+{% extends 'home.html' %}
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %}<title>Signup</title>{% endblock %}
+    {% block style %}
+    <link rel="stylesheet" href="{% static 'signup.css' %}"> 
+    {% endblock %}
+</head>
+<body>
+{% block content %}
+{% for message in messages %}
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <strong>{{message}}</strong> !
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+{% endfor %}
+
+
+<form action="signup" method="POST" id="form">
+  {% csrf_token %}   
+  <h3>SignUp Here</h3>
+  <div class="form-group">
+    <label for="username">Username</label>
+    <input type="text" name="username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+  </div>
+  <div class="form-group">
+    <label for="contact_no">Contact No</label>
+    <input type="text" name="contact_no" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+  </div>
+
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+  </div>
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input type="password" name="password" class="form-control" id="exampleInputPassword1">
+  </div>
+
+</div>
+<div class="form-group">
+  <label for="ut">User Type</label>
+  <select id="ut" name="ut" class="form-control" id="exampleInputPassword1">
+    <option value="normaluser">user</option>
+    <option value="admin">admin</option>
+  
+</select>
+</div>
+  <button type="submit" class="btn btn-primary">Register</button>
+  <h5> Alredy have an account?..<a href="/login">login</a><h5>
+</form>
+{% endblock %}
+</body>
+</html>

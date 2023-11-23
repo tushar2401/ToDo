@@ -1,0 +1,95 @@
+{% extends 'home.html' %}
+<!DOCTYPE html>
+{% load static %} 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %}<title>Tasks</title>{% endblock %}\
+    {% block style %}
+    <link rel="stylesheet" href="{% static 'tasks.css' %}"> 
+    {% endblock %}
+</head>
+<body>
+  {% block content %}
+  {% for message in messages %}
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <strong>{{message}}</strong> !
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+{% endfor %}
+{% if  not tasks %}
+<caption id="table_caption"><h2>{% if user.is_authenticated %} Hi {{user.username}},{% endif %}Great! No pending task in your list</h2></caption>
+{% endif %}
+{% if tasks %}
+  <caption id="table_caption"><h2>{% if user.is_authenticated %} Hi {{user.username}},{% endif %}Here is your ToDo List</h2></caption>
+  <table class="table" id="tasks">
+    <thead>
+      <tr>
+        <th scope="col">SrNo</th>
+        <th scope="col">Task Title</th>
+        <th scope="col">Task Description</th>
+        <th scope="col">Assigned By</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for task in tasks %}
+      <tr>
+        <td>{{forloop.counter}}</td>
+        <td>{{task.taskTitle}}</td>
+        <td>{{task.taskDesc}}</td>
+        <td>{{task.user}}</td>
+        <td><a href="">Edit</a>  <a href="/delete?title={{task.taskTitle}}">Delete</a> <a href="">Submit</a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <button id="bt" type="submit" class="btn btn-primary">  <a href="addtask">Add Task to my ToDo List</a>
+  </button>
+  {% endif %}
+  <hr>
+  {% if user.is_authenticated %} 
+  {% if user.is_staff %}
+  <caption id="table_caption"><h2>Hi {{user.username}}, You have assigned following tasks</h2></caption>
+  <table class="table" id="tasks">
+    <thead>
+      <tr>
+        <th scope="col">SrNo</th>
+        <th scope="col">Task Title</th>
+        <th scope="col">Task Description</th>
+        <th scope="col">Assigned To</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for task in a_tasks %}
+      <tr>
+        <td>{{forloop.counter}}</td>
+        <td>{{task.taskTitle}}</td>
+        <td>{{task.taskDesc}}</td>
+        <td>{{task.assignto}}</td>
+        <td><a href="">Edit</a>  <a href="/delete?title={{task.taskTitle}}">Delete</a> <a href="">Submit</a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <button id="bt" type="submit" class="btn btn-primary">  <a href="addtask">Add Task</a>
+  </button>
+  {% endif %}
+  {% endif %}
+  {% endblock %}
+  
+  {% comment %} 
+  <!--adding task using forms-->
+  <form action="/tasks" method="post" >
+    {% csrf_token %}
+    {{form.as_p}}
+      <button type="submit" class="btn btn-primary">Submit</button>
+  </form> 
+  {% endcomment %}\
+  
+  </body>
+  </html>   

@@ -1,0 +1,21 @@
+m2{
+  text-align: center;
+} 
+table{
+  background-color: antiquewhite;
+}
+#tasks{
+  margin-left: 1%;
+  width:98%;
+}
+#tasks tr:nth-child(even){background-color: #f2f2f2;}
+#tasks th{background-color: aquamarine;}
+
+#bt a{
+  color:aqua;
+}
+#bt{
+  margin-left: 45%;
+}
+git{
+bg}
